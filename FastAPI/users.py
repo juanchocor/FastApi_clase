@@ -35,7 +35,7 @@ async def user(id: int):
 #query
 @app.get("/user/")
 async def user(id: int):
-    return search_user()
+    return search_user(id)
 
 
 #creamos con un POST un nuevo usuario que nos con diferencial del id PK 
@@ -45,6 +45,41 @@ async def user(user: User):
         return { "error" : "El usuario ya existe"}
     else:
         users_list.append(user)
+        return user
+    
+
+#creacion del metodo PUT para actualizar datos.
+@app.put("/user/")
+async def user(user: User):
+
+    found = False
+
+    for index, saved_user in enumerate (users_list):
+        if saved_user.id == user.id:
+            users_list[index] = user
+            found = True
+    if not found:
+        return { "error" : "no se ha actualizado el usuario"}
+    else:
+        return user 
+    
+
+
+#creacion del metodo DELETE para eliminar datos 
+@app.delete("/user/{id}")
+async def user(id: int):
+
+    found = False
+
+    for index, saved_user in enumerate(users_list):
+        if saved_user.id == id:
+           del users_list[index] 
+           found = True
+
+    if not found:
+        return {"error":"No se ha eliminado el usuario"}
+     
+    
 
 
 
