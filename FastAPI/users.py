@@ -37,6 +37,8 @@ async def user(id: int):
 async def user(id: int):
     return search_user()
 
+
+#creamos con un POST un nuevo usuario que nos con diferencial del id PK 
 @app.post("/user/")
 async def user(user: User):
     if type(search_user(user.id)) == User:
@@ -52,6 +54,9 @@ def search_user(id: int):
         return list(users)[0]
     except:
         return { "error" : "no se ha encontrado el usuario"}
+
+
+
 
 
 
