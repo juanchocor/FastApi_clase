@@ -15,3 +15,10 @@ async def products():
 @router.get("/{id}")
 async def products(id: int):
     return products_list[id]
+from fastapi import APIRouter
+
+router = APIRouter()
+
+@router.get("/products")
+async def products():
+    return ["product1","produ"]
